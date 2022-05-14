@@ -1,12 +1,21 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ * this class perform work for a single sequence
+ */
 
 public class ZeroSequence {
+
     public int[] sequence ;
+
 
     /**
      * sort the sequence
      * @param sequence
      */
+
     public ZeroSequence(int[] sequence) {
         this.sequence = sequence;
         Arrays.sort(this.sequence);
@@ -24,6 +33,7 @@ public class ZeroSequence {
      *
      * When all numbers in the sequence are distinct the answer must be n+1.
      */
+
     public int  getMinNumberOperations() {
         int min = sequence[0];
         int numberOfZero;
@@ -39,17 +49,12 @@ public class ZeroSequence {
         return sequence.length + 1 ;
     }
 
-        /**
-         * to be completed
-         */
-
-
-
     /**
      * get the number of zeros in a sorted sequence
      * @param seq
      * @return
      */
+
     private int getFirstZeroNumbers(int[] seq){
       int i=0 ;
       while(seq[i]==0){
@@ -68,5 +73,53 @@ public class ZeroSequence {
            if(sequence[i] == sequence[i+1]) return true   ;
         }
         return false ;
+    }
+
+
+
+}
+
+class CodeForce{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in) ;
+        int testNumber=scanner.nextInt();
+        CodeForcesIteration(testNumber) ;
+
+    }
+    private static void   CodeForcesIteration(int testNumber) {
+        int result ;
+        ZeroSequence zeroSequence ;
+        ArrayList<Integer> sequence = new ArrayList<>();
+
+        /**
+         * element to be read from the standard input
+         */
+        int element;
+
+        for (int i = 0; i < testNumber; i++) {
+            /**
+             * read the sequence length
+             */
+            Scanner scanner = new Scanner(System.in);
+            int sequenceLength = scanner.nextInt();
+            /**
+             *
+             */
+            for (int j = 0; j < sequenceLength; j++) {
+                element = scanner.nextInt();
+                sequence.add(element);
+                sequence.clear() ;
+            }
+            int[] NativeSeq= new int[sequence.size()] ;
+            for(int k =0; k<sequence.size();k++){
+                NativeSeq[k]=sequence.get(k) ;
+            }
+            /**
+             * instantiate objects
+             */
+            zeroSequence  = new ZeroSequence(NativeSeq) ;
+            result = zeroSequence.getMinNumberOperations() ;
+            System.out.println(result);
+        }
     }
 }
